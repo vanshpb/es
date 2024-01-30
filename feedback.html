@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment Section</title>
+    <link rel="stylesheet" href="c.css">
+    <style>
+        body {
+            height: 100%;
+            width: 100%;
+            margin-top: 0px;
+        }
+        #head{
+            font-size: 40px;
+            background: #e3005b;
+            /* background: #7300ff; */
+        }
+        #commentForm {
+            font-size: 35px;
+            border-radius: 5px;
+            background: #e3005b;
+            height: 99%;
+            width: 89%;
+            border: 10px solid black;
+            margin-top: 10px;
+        }
+
+        #comments {
+            border-radius: 10px;
+            height: 100%;
+            width: 100%;
+            list-style-type: none;
+            padding: 1px;
+        }
+
+        #label {
+            height: 100%;
+            width: 100%;
+            margin-top: 20px;
+            padding-top: 30px;
+        }
+
+        .comment {
+
+            margin-top: 1px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .comment-text {
+            margin-right: 0px;
+        }
+
+        .delete-button {
+            cursor: pointer;
+            color: red;
+        }
+        #submit{
+            background: #000;
+            color:aliceblue;
+            font-size: 30px;
+        }
+        @keyframes colorChange {
+            0% {
+                color: red;
+            }
+
+            25% {
+                color: blue;
+            }
+
+            50% {
+                color: green;
+            }
+
+            75% {
+                color: orange;
+            }
+
+            100% {
+                color: red;
+            }
+        }
+
+        .animated-text {
+            font-size: 24px;
+            font-weight: bold;
+            animation: colorChange 4s infinite;
+            /* 4s duration, infinite loop */
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="head" class="animated">Feedback Section</h1>
+    <div class="container">
+		<form id="commentForm" method="post" action="https://script.google.com/macros/s/AKfycbzxwUC9oaaNk8p5US14v_-Gvl1iqrckJIRIYOkjNoP2rNgrJKOT34DOQvzVrGI5jMTO/exec" name="contact-form">
+			<label for="name" id="label">Name: <br><input type="text" name="name1"  required></label>
+			<label for="comment"><br><br>FEEDBACK: <br><input name="message" id="comment"  rows="4" required></input></label>
+            <br>
+            <br>
+            <button type="submit" id="submit" class="animated-text">SUBMIT</button>
+		</form>
+	</div>
+    <hr>
+    <ul id="comments"></ul>
+
+    <script>
+        // 
+        const scriptURL ='https://script.google.com/macros/s/AKfycbzxwUC9oaaNk8p5US14v_-Gvl1iqrckJIRIYOkjNoP2rNgrJKOT34DOQvzVrGI5jMTO/exec'
+
+        const form = document.forms['contact-form']
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, {
+                    method: 'POST',
+                    body: new FormData(form)
+                })
+                .then(response => alert("Thank you! your form is submitted successfully."))
+                .then(() => {
+                    window.location.reload();
+                })
+                .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+</body>
+</html>
+
+<!-- -------------------------------------------------------------------------------------------------- -->
